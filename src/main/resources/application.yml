@@ -1,0 +1,29 @@
+server:
+  port: 8084
+spring:
+  profiles:
+    active: dev
+  application:
+    name: concurrent-examples
+  data: 
+    elasticsearch:
+      cluster-name: my-application
+      clusterNodes: 127.0.0.1:9300  #,127.0.0.1:9301,127.0.0.1:9302
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  metrics:
+    web:
+      server:
+        auto-time-requests: true
+logging: #配置sql日志打印
+   config: classpath:logback-spring.xml
+   file-name: '${CRM_ADMIN_LOG_HOME: ${user.home}/data/${spring.application.name}${server.port}/logs}'
+   level-service: INFO
